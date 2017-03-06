@@ -93,7 +93,7 @@ public class SaveTvConnection {
      * @return a sorted list of {@link Recording}s
      */
     public List<Recording> retrieveRecordings() {
-        URI requestUri = SaveTvUriUtils.videoArchiveUri(config.getEntriesPerRequest());
+        URI requestUri = SaveTvUriUtils.videoArchiveUri(config.getEntriesPerRequest(), config.getEntryMinAge());
 
         return responseParser.extractRecordings(executeGetOnUri(requestUri));
     }

@@ -25,6 +25,7 @@ public class SaveTvConfig {
     private static final int NUMBER_OF_ENTRIES_PER_REQUEST_DEFAULT = 500;
     private static final boolean DELETE_ON_SUCCESS_DEFAULT = false;
     private static final String FORMAT_SELECTION_DEFAULT = "CUT_BEST_QUALITY";
+    private static final int MIN_AGE_DEFAULT = 3;
 
     private final Configuration config;
 
@@ -78,6 +79,10 @@ public class SaveTvConfig {
         return config.getInt(Constants.ENTRIES_PER_REQUEST, NUMBER_OF_ENTRIES_PER_REQUEST_DEFAULT);
     }
 
+    public int getEntryMinAge() {
+        return config.getInt(Constants.MIN_AGE, MIN_AGE_DEFAULT);
+    }
+
     /**
      * Defines the property-keys which can be used in the ".properties"-file.
      */
@@ -98,6 +103,7 @@ public class SaveTvConfig {
         private static final String FORMAT_SELECTION = "download.format.selection";
         private static final String DELETE_ON_SUCCESS = "download.delete.on.success";
         private static final String ENTRIES_PER_REQUEST = "retrieve.entries.per.request";
+        private static final String MIN_AGE = "retrieve.entries.age.min";
 
         private Constants() {
             throw new UnsupportedOperationException("Utility-Class should not be instantiated.");

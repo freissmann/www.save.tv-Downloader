@@ -44,6 +44,8 @@ public final class SaveTvDownloaderApp {
 
         List<Recording> recordings = saveTvConnection.retrieveRecordings();
 
+        LOGGER.info("Found {} recordings to download", recordings.size());
+
         for (Recording recording : recordings) {
             saveTvConnection.download(recording);
 

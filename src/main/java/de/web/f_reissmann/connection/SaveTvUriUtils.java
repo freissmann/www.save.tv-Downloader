@@ -39,26 +39,27 @@ final class SaveTvUriUtils {
      * Creates the {@link URI} used for retrieving the recordings from the online-archive.
      *
      * @param numberOfEntries the number of entries to receive at most
+     * @param minAge          retrieved entries must at least be <code>minAge</code> days old
      * @return an {@link URI}
      */
-    static URI videoArchiveUri(int numberOfEntries) {
-        return videoArchiveUri(numberOfEntries, NO_SEARCH);
+    static URI videoArchiveUri(int numberOfEntries, int minAge) {
+        return videoArchiveUri(numberOfEntries, minAge, NO_SEARCH);
     }
 
     /**
      * Creates the {@link URI} used for retrieving the recordings from the online-archive.
      * <p>
-     * But retrieves only recordings which match the given <code>searchString</code>-
+     * But retrieves only recordings which match the given <code>searchString</code>.
      *
      * @param numberOfEntries the number of entries to receive at most
-     * @param searchString    the recordings must match this
-     * @return an {@link URI}
+     * @param minAge          retrieved entries must at least be <code>minAge</code> days old
+     * @param searchString    the recordings must match this  @return an {@link URI}
      */
-    static URI videoArchiveUri(int numberOfEntries, String searchString) {
+    static URI videoArchiveUri(int numberOfEntries, int minAge, String searchString) {
         LocalDate now = LocalDate.now();
 
         String startDate = now.minusYears(1).toString();
-        String endDate = now.toString();
+        String endDate = now.minusDays(minAge).toString();
         String encodedSearchString = URLEncoderUtil.encodeSafely(searchString);
 
         String query = String.format("iEntriesPerPage=%d&iRecordingState=1&dStartdate=%s&dEnddate=%s&sSearchString=%s",
